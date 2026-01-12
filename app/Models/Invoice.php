@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\InvoiceStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -15,6 +16,11 @@ class Invoice extends Model
         'payment_terms',
         'project_description',
         'status',
+    ];
+
+    protected $casts = [
+        'status' => InvoiceStatus::class,
+        'payment_due' => 'datetime'
     ];
 
     public function businessAddress(): BelongsTo

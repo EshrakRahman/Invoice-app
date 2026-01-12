@@ -25,66 +25,13 @@
             </div>
         </div>
         <div class="invoice-area pt-20 flex flex-col gap-4">
-            <div class="content bg-white shadow px-6 py-4 rounded-lg">
-                <div class="invoice flex items-center gap-4 justify-between">
-                    <p class="invoice-id font-bold text-base leading-4 text-dark-900 "><span
-                            class="text-text-muted">#</span>RT3080</p>
-                    <p class="date text-[13px] leading-4 font-medium text-text-muted">Due 19 Aug 2021</p>
-                    <p class="client text-[13px] leading-4 font-medium text-text-muted">Jensen Huang</p>
-                    <p class="amount text-base text-dark-900 leading-6 font-bold">£ 1,800.90</p>
-                    <div class="flex items-center gap-3 status-button">
-                        <div class="status w-26 h-10 bg-[#33D69F]/5 rounded-lg flex items-center justify-center">
-                            <div class="flex items-center gap-3">
-                                <div class="w-2.5 h-2.5 bg-[#33D69F] rounded-full"></div>
-                                <p class="text-[#33D69F] text-base leading-4">Paid</p>
-                            </div>
-                        </div>
-                        <div class="">
-                            <img src="{{ Vite::asset('resources/images/icon-arrow-right.svg') }}" alt="arrow left icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="content bg-white shadow px-6 py-4 rounded-lg">
-                <div class="invoice flex items-center gap-4 justify-between">
-                    <p class="invoice-id font-bold text-base leading-4 text-dark-900 "><span
-                            class="text-text-muted">#</span>RT3080</p>
-                    <p class="date text-[13px] leading-4 font-medium text-text-muted">Due 19 Aug 2021</p>
-                    <p class="client text-[13px] leading-4 font-medium text-text-muted">Jensen Huang</p>
-                    <p class="amount text-base text-dark-900 leading-6 font-bold">£ 1,800.90</p>
-                    <div class="flex items-center gap-3 status-button">
-                        <div class="status w-26 h-10 bg-[#FF8F00]/5 rounded-lg flex items-center justify-center">
-                            <div class="flex items-center gap-3">
-                                <div class="w-2.5 h-2.5 bg-[#FF8F00] rounded-full"></div>
-                                <p class="text-[#FF8F00] text-base leading-4">Pending</p>
-                            </div>
-                        </div>
-                        <div class="">
-                            <img src="{{ Vite::asset('resources/images/icon-arrow-right.svg') }}" alt="arrow left icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="content bg-white shadow px-6 py-4 rounded-lg">
-                <div class="invoice flex items-center gap-4 justify-between">
-                    <p class="invoice-id font-bold text-base leading-4 text-dark-900 "><span
-                            class="text-text-muted">#</span>RT3080</p>
-                    <p class="date text-[13px] leading-4 font-medium text-text-muted">Due 19 Aug 2021</p>
-                    <p class="client text-[13px] leading-4 font-medium text-text-muted">Jensen Huang</p>
-                    <p class="amount text-base text-dark-900 leading-6 font-bold">£ 1,800.90</p>
-                    <div class="flex items-center gap-3 status-button">
-                        <div class="status w-26 h-10 bg-[#373B53]/5 rounded-lg flex items-center justify-center">
-                            <div class="flex items-center gap-3">
-                                <div class="w-2.5 h-2.5 bg-[#373B53] rounded-full"></div>
-                                <p class="text-[#373B53] text-base leading-4">Draft</p>
-                            </div>
-                        </div>
-                        <div class="">
-                            <img src="{{ Vite::asset('resources/images/icon-arrow-right.svg') }}" alt="arrow left icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @foreach ($invoiceData as $invoice)
+                <x-ui.single-row-invoice :invoice_number="$invoice->invoice_number" :client_name="$invoice->client->name" :due_date="$invoice->payment_due->format('d M Y')" :total_amount="'£ ' . number_format($invoice->invoiceItems->sum('total'), 2)"
+                    :status="$invoice->status" />
+            @endforeach
         </div>
+
+
+
     </section>
 </x-layout.layout>
