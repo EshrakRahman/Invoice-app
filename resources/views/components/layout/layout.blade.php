@@ -14,9 +14,10 @@
 </head>
 
 <body class="font-sans">
-    <x-layout.content>
+    <x-layout.header />
+    <main class="lg:ml-10 mt-5">
         {{ $slot }}
-    </x-layout.content>
+    </main>
 </body>
 
 </html>
