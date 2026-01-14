@@ -1,55 +1,54 @@
-<section class="sender w-full flex flex-col gap-6">
+<section x-data="{
+    items: [{ name: '', qty: 1, price: 0 }],
+    addItem() {
+        this.items.push({ name: '', qty: 1, price: 0 });
+    },
+    removeItem(index) {
+        this.items.splice(index, 1);
+    }
+}" class="w-full flex flex-col gap-6">
 
-    <div {{ $attributes->merge(['class' => 'flex flex-col gap-3']) }}>
-        <label for="item_name" class="text-[13px] leading-4 font-medium text-text-muted  ">
-            Item Name
-        </label>
+    <template x-for="(item, index) in items" :key="index">
+        <div class="flex flex-col gap-6 mb-8 border-b border-light-card pb-8 lg:border-none lg:pb-0">
 
-        <input class="bg-white border py-4 rounded-lg px-3  border-light-card" type='text' placeholder='Item Name'
-            name="item_name" id="item_name">
-    </div>
+            <div class="flex flex-col gap-3">
+                <label class="text-[13px] font-medium text-text-muted">Item Name</label>
+                <input x-model="item.name" class="bg-white border py-4 rounded-lg px-3 border-light-card" type="text">
+            </div>
 
-    <div class="quantity-info flex gap-3 items-center w-full">
-        <div class="flex flex-col gap-3 w-[25%]">
-            <label for="quantity" class="text-[13px] leading-4 font-medium text-text-muted  ">
-                Qty.
-            </label>
-            <input class="bg-white border py-4 rounded-lg px-3  border-light-card" type='number' placeholder='2'
-                name="quantity" id="quantity">
+            <div class="quantity-info flex gap-3 items-center w-full">
+                <div class="flex flex-col gap-3 w-[20%]">
+                    <label class="text-[13px] font-medium text-text-muted">Qty.</label>
+                    <input x-model.number="item.qty" class="bg-white border py-4 rounded-lg px-3 border-light-card"
+                        type="number">
+                </div>
+
+                <div class="flex flex-col gap-3 w-[30%]">
+                    <label class="text-[13px] font-medium text-text-muted">Price</label>
+                    <input x-model.number="item.price" class="bg-white border py-4 rounded-lg px-3 border-light-card"
+                        type="number">
+                </div>
+
+                <div class="flex flex-col gap-3 w-[30%]">
+                    <label class="text-[13px] font-medium text-text-muted">Total</label>
+                    <div class="py-4 px-3 font-bold text-grayish-blue">
+                        £ <span x-text="(item.qty * item.price).toFixed(2)"></span>
+                    </div>
+                </div>
+
+                <div class="flex w-[10%] pt-6">
+                    <button @click="removeItem(index)" type="button" class="hover:brightness-75 transition-all">
+                        <img src="{{ Vite::asset('resources/images/icon-delete.svg') }}" alt="Delete">
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="flex flex-col gap-3 w-[25%]">
-            <label for="price" class="text-[13px] leading-4 font-medium text-text-muted  ">
-                Price
-            </label>
-            <input class="bg-white border py-4 rounded-lg px-3  border-light-card" type='number' placeholder='£1500.00'
-                name="price" id="price">
-        </div>
+    </template>
 
-        <div class="flex flex-col gap-3 w-[25%]">
-            <label for="total" class="text-[13px] leading-4 font-medium text-text-muted  ">
-                Total
-            </label>
-            <input class="bg-white border-none outline-none py-4 rounded-lg px-3  border-light-card" type='text'
-                placeholder='£1500.00' name="total" id="total">
-        </div>
-
-        <div class="flex w-[25%] ">
-            <button>
-                <img class="w-6 mt-4.25" src="{{ Vite::asset('resources/images/icon-delete.svg') }}" alt="Delete icon">
-            </button>
-        </div>
-    </div>
-
-    <div class="cta w-full ">
-        <a href=""
-            class="w-full flex items-center justify-center py-5 bg-[#F9FAFE] rounded-full font-base font-bold leading-4 text-text-muted transition-colors hover:bg-[#DFE3FA]">+
-            Add New Item</a>
+    <div class="cta w-full">
+        <button type="button" @click="addItem()"
+            class="w-full flex items-center justify-center py-5 bg-[#F9FAFE] rounded-full font-bold text-text-muted hover:bg-[#DFE3FA] transition-colors">
+            + Add New Item
+        </button>
     </div>
 </section>
-{{-- @error($name)
-        <p class="text-red-500 text-[12px]">
-            {{ $message }}
-        </p>
-    @enderror --}}
-
-{{-- value="{{ old($name, $value) }}" --}}

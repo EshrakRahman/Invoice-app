@@ -1,5 +1,5 @@
 <x-layout.layout>
-    <section class="px-6 pt-6 md:w-[40%] pb-20">
+    <section class="px-6 md:mx-auto md:w-[60%]  pt-6  pb-20">
         <x-invoice.header title="New Invoice" />
         <div class="sender py-3">
             <p class=" py-6 text-base font-bold leading-4 text-[#7C5DFA] ">Bill Form</p>
@@ -17,5 +17,9 @@
         <div class="items-list py-3">
             <x-invoice.items-list />
         </div>
+
+        <x-ui.invoice-form-button />
     </section>
+
+
 </x-layout.layout>
