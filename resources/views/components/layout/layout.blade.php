@@ -15,7 +15,7 @@
 
 <body class="font-sans">
     <x-layout.header />
-    <main class="lg:ml-10 mt-5">
+    <main class="lg:ml-25 mt-5">
         {{ $slot }}
     </main>
 </body>
