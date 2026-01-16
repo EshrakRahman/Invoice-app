@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('invoice_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('invoice_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->unsignedSmallInteger('quantity');
-            $table->decimal('price', 8, 2);
-            $table->decimal('total', 8, 2);
+            $table->string('item_name');
+            $table->unsignedSmallInteger('item_quantity');
+            $table->decimal('item_price', 8, 2);
+            $table->decimal('item_total', 8, 2);
             $table->timestamps();
         });
     }

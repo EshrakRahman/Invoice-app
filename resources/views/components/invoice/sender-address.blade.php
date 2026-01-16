@@ -3,7 +3,7 @@
         value="street_address" />
     <div class="flex justify-between gap-4">
         <x-ui.input-element label="City" placeholder="London" name="city" value="city" />
-        <x-ui.input-element label="Post Code" placeholder="E1 3EZ" name="post_code" value="post_code" />
+        <x-ui.input-element label="Post Code" placeholder="E1 3EZ" name="post-code" value="post-code" />
     </div>
 
     <x-ui.input-element label="Country" placeholder="United Kingdom" name="country" value="country" />

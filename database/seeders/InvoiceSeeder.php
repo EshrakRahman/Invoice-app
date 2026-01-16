@@ -28,13 +28,13 @@ class InvoiceSeeder extends Seeder
         foreach ($invoices as $inv) {
             // 3. Create or get client
             $client = Client::firstOrCreate([
-                'email' => $inv['clientEmail']
+                'client_email' => $inv['clientEmail']
             ], [
-                'name' => $inv['clientName'],
-                'street_address' => $inv['clientAddress']['street'],
-                'post_code' => $inv['clientAddress']['postCode'],
-                'city' => $inv['clientAddress']['city'],
-                'country' => $inv['clientAddress']['country'],
+                'client_name' => $inv['clientName'],
+                'client_street_address' => $inv['clientAddress']['street'],
+                'client_post_code' => $inv['clientAddress']['postCode'],
+                'client_city' => $inv['clientAddress']['city'],
+                'client_country' => $inv['clientAddress']['country'],
             ]);
 
             // 4. Create invoice
@@ -53,10 +53,10 @@ class InvoiceSeeder extends Seeder
             foreach ($inv['items'] as $item) {
                 InvoiceItem::create([
                     'invoice_id' => $invoice->id,
-                    'name' => $item['name'],
-                    'quantity' => $item['quantity'],
-                    'price' => $item['price'],
-                    'total' => $item['total'],
+                    'item_name' => $item['name'],
+                    'item_quantity' => $item['quantity'],
+                    'item_price' => $item['price'],
+                    'item_total' => $item['total'],
                 ]);
             }
         }
